@@ -17,6 +17,11 @@ This README would normally document whatever steps are necessary to get your app
 * How to run tests
 * Deployment instructions
 
+```sh
+> sudo -E apt-get install build-essential gfortran tcl git m4 freeglut3 doxygen libblas-dev liblapack-dev libx11-dev libnuma-dev zlib1g-dev libhwloc-dev
+> cpan Moose
+```
+
 ### Contribution guidelines ###
 
 * Writing tests
