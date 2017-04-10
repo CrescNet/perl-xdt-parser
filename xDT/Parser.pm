@@ -6,6 +6,7 @@ use FileHandle;
 use Carp;
 
 use xDT::Record;
+use xDT::RecordSet;
 
 
 has 'fh' => (
@@ -33,12 +34,24 @@ sub close {
     close $self->fh;
 }
 
-sub next {
+sub _next {
     my $self = shift;
 
     my $line = $self->fh->getline() or return undef;
 
     return xDT::Record->new($line);
+}
+
+sub nextRecordSet {
+    my $self = shift;
+    my $recordSet = xDT::RecordSet->new();
+
+    while (my $record = $self->_next()) {
+        last if ($record->getRecordType() eq '2017');
+        $recordSet->addRecord($record);
+    }
+
+    return $recordSet;
 }
 
 

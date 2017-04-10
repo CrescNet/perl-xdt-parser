@@ -9,8 +9,9 @@ use Data::Dumper;
 my $parser = xDT::Parser->new();
 $parser->open(shift);
 
-while (my $record = $parser->next()) {
-    print join("\t", $record->getRecordType()->getName(), $record->getLength(), $record->getValue()). "\n";
+while (my $recordSet = $parser->nextRecordSet()) {
+    last if ($recordSet->isEmpty());
+    print Dumper($recordSet);
 }
 
 $parser->close();
