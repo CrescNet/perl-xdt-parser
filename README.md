@@ -1,27 +1,25 @@
-# README #
-
-This README would normally document whatever steps are necessary to get your application up and running.
+# Perl-based xDT Parser #
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* This repository contains a perl project for parsing xDT files.
+* Version: 0.1
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
+* Summary of set up:
 ```sh
 > sudo -E apt-get install build-essential gfortran tcl git m4 freeglut3 doxygen libblas-dev liblapack-dev libx11-dev libnuma-dev zlib1g-dev libhwloc-dev
-> cpan Moose
-> cpan namespace::autoclean
+> cpan Moose namespace::autoclean XML::Simple
 ```
+* Configuration:
+  * The file xDT::Configuration::RecordTypes.xml contains all supported record types and is extensible.
+* Dependencies:
+  * Moose
+  * namespace::autoclean
+  * XML::Simple
+* How to run tests:
+* Deployment instructions:
 
 ### Contribution guidelines ###
 
@@ -31,5 +29,5 @@ This README would normally document whatever steps are necessary to get your app
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* BChristoph
+* CrescNet, IMISE

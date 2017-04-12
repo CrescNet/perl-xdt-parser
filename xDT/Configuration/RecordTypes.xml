@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<RecordTypes>
+	<RecordType id="0201" length="9" type="num" accessor="bsnr">
+		<label lang="en">BSNR</label>
+		<label lang="de">BSNR</label>
+	</RecordType>
+
+	<RecordType id="0202" length="var" type="alnum" accessor="healthInsurance">
+		<label lang="en">Health Insurance</label>
+		<label lang="de">Name des Kostenträgers</label>
+	</RecordType>
+
+	<RecordType id="0212" length="9" type="num" accessor="lanr">
+		<label lang="en">LANR</label>
+		<label lang="de">LANR</label>
+	</RecordType>
+
+	<RecordType id="3000" length="var" type="alnum" accessor="patientNumber">
+		<label lang="en">Patient Number</label>
+		<label lang="de">Patientennummer</label>
+	</RecordType>
+	
+	<RecordType id="3101" length="var" type="alnum" accessor="surname">
+		<label lang="en">Surname</label>
+		<label lang="de">Nachname</label>
+	</RecordType>
+
+	<RecordType id="3102" length="var" type="alnum" accessor="firstname">
+		<label lang="en">Firstname</label>
+		<label lang="de">Vorname</label>
+	</RecordType>
+
+	<RecordType id="3103" length="7" type="date" accessor="birthdate">
+		<label lang="en">Date of Birth</label>
+		<label lang="de">Geburtsdatum</label>
+	</RecordType>
+
+	<RecordType id="3104" length="var" type="alnum" accessor="title">
+		<label lang="en">Title</label>
+		<label lang="de">Titel</label>
+	</RecordType>
+
+	<RecordType id="3105" length="var" type="alnum" accessor="insuranceNumber">
+		<label lang="en">Insurance Number</label>
+		<label lang="de">Versichertennummer</label>
+	</RecordType>
+
+	<RecordType id="3106" length="var" type="alnum" accessor="zipCodePlace">
+		<label lang="en">Zip-Code Place</label>
+		<label lang="de">PLZ Ort</label>
+	</RecordType>
+
+	<RecordType id="3107" length="var" type="alnum" accessor="street">
+		<label lang="en">Street</label>
+		<label lang="de">Straße</label>
+	</RecordType>
+
+	<RecordType id="3110" length="1" type="num" accessor="gender">
+		<label lang="en">Gender (1=male)</label>
+		<label lang="de">Geschlecht (1=männlich)</label>
+	</RecordType>
+
+	<RecordType id="3622" length="var" type="float" accessor="height">
+		<label lang="en">Height in cm</label>
+		<label lang="de">Größe in cm</label>
+	</RecordType>
+
+	<RecordType id="3623" length="var" type="float" accessor="weight">
+		<label lang="en">Weight in kg</label>
+		<label lang="de">Gewicht in kg</label>
+	</RecordType>
+
+	<RecordType id="6200" length="8" type="date" accessor="storageDate">
+		<label lang="en">Date of storage of treatment data</label>
+		<label lang="de">Tag der Speicherung von Behandlungsdaten</label>
+	</RecordType>
+
+	<RecordType id="6201" length="6" type="time" accessor="storageTime">
+		<label lang="en">Time of treatment data elicitation</label>
+		<label lang="de">Zeit der Erhebung von Behandlungsdaten</label>
+	</RecordType>
+	
+	<RecordType id="8000" length="4" type="alnum" accessor="identification">
+		<label lang="en">Record Identification</label>
+		<label lang="de">Satzidentifikation</label>
+	</RecordType>
+
+	<RecordType id="8100" length="7" type="num" accessor="recordLength">
+		<label lang="en">Length of Record</label>
+		<label lang="de">Satzlänge</label>
+	</RecordType>
+
+	<RecordType id="8201" length="var" type="num" accessor="objectEnd">
+		<label lang="en">Object End</label>
+		<label lang="de">Objectende</label>
+	</RecordType>
+
+	<RecordType id="8402" length="var" type="alnum" accessor="specificMap">
+		<label lang="en">Device and Process Specific Characteristic Map</label>
+		<label lang="de">Gerät und verfahrensspezifisches Kennfeld</label>
+	</RecordType>
+
+	<RecordType id="8405" length="var" type="alnum" accessor="patientInformation">
+		<label lang="en">Information about Patient</label>
+		<label lang="de">Patienteninformation</label>
+	</RecordType>
+
+	<RecordType id="8432" length="8" type="date" accessor="collectionDate">
+		<label lang="en">Date of Collection</label>
+		<label lang="de">Abnahme-Datum</label>
+	</RecordType>
+
+	<RecordType id="8439" length="6" type="time" accessor="collectionTime">
+		<label lang="en">Time of Collection</label>
+		<label lang="de">Abnahme-Zeit</label>
+	</RecordType>
+
+	<RecordType id="9206" length="1" type="num" accessor="charset">
+		<label lang="en">Used Character Set</label>
+		<label lang="de">Verwendeter Zeichensatz</label>
+	</RecordType>
+
+	<RecordType id="9218" length="5" type="alnum" accessor="gdtVersion">
+		<label lang="en">Version GDT</label>
+		<label lang="de">Version GDT</label>
+	</RecordType>
+
+	<!-- BDT -->
+	<RecordType id="5098" length="9" type="num" accessor="bsnr">
+		<label lang="en">BSNR</label>
+		<label lang="de">BSNR</label>
+	</RecordType>
+
+	<RecordType id="5099" length="9" type="num" accessor="bsnr">
+		<label lang="en">LANR</label>
+		<label lang="de">LANR</label>
+	</RecordType>
+
+	<!--
+	<RecordType id="" length="" type="" accessor="">
+		<label lang="en"></label>
+		<label lang="de"></label>
+	</RecordType>
+	-->
+
+	<!--
+		'0201' => 'BSNR',
+		'0212' => 'LANR',
+	-->
+</RecordTypes>

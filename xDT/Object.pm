@@ -1,4 +1,4 @@
-package xDT::RecordSet;
+package xDT::Object;
 
 use Moose;
 use namespace::autoclean;
@@ -8,10 +8,10 @@ use xDT::Record;
 
 
 has 'records' => (
-    is       => 'rw',
-    isa      => 'ArrayRef[xDT::Record]',
-    traits   => ['Array'],
-    default  => sub { [ ] },
+    is      => 'rw',
+    isa     => 'ArrayRef[xDT::Record]',
+    traits  => ['Array'],
+    default => sub { [ ] },
     handles => {
         getRecords    => 'elements',
         addRecord     => 'push',
@@ -27,6 +27,15 @@ sub isEmpty {
     my $self = shift;
 
     return $self->recordCount == 0;
+}
+
+sub get {
+    my $self     = shift;
+    my $accessor = shift // croak('Error: parameter $accessor missing.');
+
+    foreach my $record ($self->getRecords()) {
+        return $record if ($record->getAccessor() eq $accessor);
+    }
 }
 
 

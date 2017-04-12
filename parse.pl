@@ -9,9 +9,11 @@ use Data::Dumper;
 my $parser = xDT::Parser->new();
 $parser->open(shift);
 
-while (my $recordSet = $parser->nextRecordSet()) {
-    last if ($recordSet->isEmpty());
-    print Dumper($recordSet);
+while (my $object = $parser->nextObject()) {
+    last if ($object->isEmpty());
+    
+    $Data::Dumper::Sortkeys = 1;
+    print Dumper($object);
 }
 
 $parser->close();

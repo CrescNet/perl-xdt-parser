@@ -3,71 +3,96 @@ package xDT::RecordType;
 use Moose;
 use namespace::autoclean;
 use Carp;
+use XML::Simple;
+use File::Basename;
 
 use constant {
-	TYPES => {
-		'8000' => 'Record Type',
-		'8100' => 'Record Length',
-		'9206' => 'Used Character Set',
-		'9218' => 'Version GDT',
-		'3000' => 'Patient Number',
-		'3104' => 'Title',
-		'3101' => 'Surname',
-		'3102' => 'Firstname',
-		'3103' => 'Date of Birth',
-		'3110' => 'Gender (1=male)',
-		'3107' => 'Street',
-		'3106' => 'Zip-Code Place',
-		'3105' => 'Insurance Number',
-		'2002' => 'Health Insurance',
-		'5098' => 'BSNR',
-		'0201' => 'BSNR',
-		'5099' => 'LANR',
-		'0212' => 'LANR',
-		'8405' => 'Information about Patient',
-		'6200' => 'Examination Date',
-		'8402' => 'Device and Process Specific Characteristic Map',
-		'8432' => 'Date of Collection',
-		'8439' => 'Time of Collection',
-		'2017' => 'End of Object',
-	},
 	LENGTH => 4,
 };
 
-has nr => (
+has id => (
 	is            => 'ro',
 	isa           => 'Str',
 	required      => 1,
-	reader        => 'getNr',
-	trigger       => \&_checkNr,
+	reader        => 'getId',
+	trigger       => \&_checkId,
 	documentation => 'Unique identifier of this record type.',
 );
 
+has labels => (
+	is            => 'ro',
+	isa           => 'Maybe[HashRef[Str]]',
+	reader        => 'getLabels',
+	documentation => 'The human readable labels of this record type. Language is used as key value.',
+);
+
+has accessor => (
+	is            => 'ro',
+	isa           => 'Str',
+	required      => 1,
+	reader        => 'getAccessor',
+	documentation => 'Short string for easy access to this record via xDT::Object.',
+);
+
+has length => (
+	is            => 'ro',
+	isa           => 'Maybe[Str]',
+	reader        => 'getLength',
+	documentation => 'Get max length of this record type.',
+);
+
+has type => (
+	is            => 'ro',
+	isa           => 'Maybe[Str]',
+	reader        => 'getType',
+	documentation => 'Corresponds to xDT record type string.'
+);
 
 around BUILDARGS => sub {
 	my $orig  = shift;
 	my $class = shift;
 
 	if (@_ == 1 && !ref $_[0]) {
-		return $class->$orig(nr => $_[0]);
+		return $class->$orig(_extractParametersFromConfigFile($_[0]));
 	} else {
-	   return $class->$orig(@_);
+		my %params = @_;
+		return $class->$orig(_extractParametersFromConfigFile($params{'id'}));
 	}
 };
 
 
-sub getName {
+sub isObjectEnd {
 	my $self = shift;
 
-	return TYPES->{$self->getNr()} // $self->getNr();
+	return $self->getId == 8201;
+}
+
+sub _extractParametersFromConfigFile {
+	my $id = shift // croak('Error: parameter $id missing.');
+
+	my $xml = new XML::Simple(
+		KeyAttr    => { RecordType => 'id', label => 'lang' },
+		ForceArray => 1,
+		ContentKey => '-content',
+	);
+	my $config = $xml->XMLin(File::Basename::dirname(__FILE__). '/Configuration/RecordTypes.xml')
+		->{RecordType}->{$id};
+	
+	return (
+		id       => $id,
+		labels   => $config->{label},
+		type     => $config->{type},
+		accessor => $config->{accessor} // $id,
+		length   => $config->{length},
+	);
 }
 
 
-sub _checkNr {
-	my ($self, $nr) = @_;
+sub _checkId {
+	my ($self, $id) = @_;
 
-	croak(sprintf("Error: attribute 'nr' has length %d (should be %d).", length $nr, LENGTH))
-		unless (length $nr == LENGTH);
+	croak(sprintf("Error: attribute 'id' has length %d (should be %d).", length $id, LENGTH))
+		unless (length $id == LENGTH);
 }
 
 
