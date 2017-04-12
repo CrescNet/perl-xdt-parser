@@ -14,6 +14,7 @@ while (my $object = $parser->nextObject()) {
     
     $Data::Dumper::Sortkeys = 1;
     print Dumper($object);
+    print Dumper($object->get('collectionDate'));
 }
 
 $parser->close();

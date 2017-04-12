@@ -18,6 +18,7 @@ has 'records' => (
         mapRecords    => 'map',
         recordCount   => 'count',
         sortedRecords => 'sort',
+        nextRecord    => 'shift',
     },
     documentation => 'A collection of logical associated records.',
 );
@@ -33,9 +34,7 @@ sub get {
     my $self     = shift;
     my $accessor = shift // croak('Error: parameter $accessor missing.');
 
-    foreach my $record ($self->getRecords()) {
-        return $record if ($record->getAccessor() eq $accessor);
-    }
+    return grep { $_->getAccessor() eq $accessor } $self->getRecords();
 }
 
 
