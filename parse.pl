@@ -1,10 +1,10 @@
 #!/usr/bin/perl -w
 
-use lib '/home/cbeger/xDT_parser/xDT'; # remove this line when modules are included in a package
+use Moose;
+use Data::Dumper;
 
 use xDT::Parser;
 
-use Data::Dumper;
 
 my $parser = xDT::Parser->new();
 $parser->open(shift);
