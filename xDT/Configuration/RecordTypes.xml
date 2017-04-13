@@ -106,14 +106,49 @@
 		<label lang="de">Patienteninformation</label>
 	</RecordType>
 
+	<RecordType id="8410" length="var" type="alnum" accessor="testIdentification">
+		<label lang="en">Test Identification</label>
+		<label lang="de">Test-Identifikator</label>
+	</RecordType>
+
+	<RecordType id="8420" length="var" type="float" accessor="result">
+		<label lang="en">Result</label>
+		<label lang="de">Ergebniswert</label>
+	</RecordType>
+
+	<RecordType id="8421" length="var" type="alnum" accessor="unit">
+		<label lang="en">Unit</label>
+		<label lang="de">Einheit</label>
+	</RecordType>
+
 	<RecordType id="8432" length="8" type="date" accessor="collectionDate">
 		<label lang="en">Date of Collection</label>
 		<label lang="de">Abnahme-Datum</label>
 	</RecordType>
 
-	<RecordType id="8439" length="6" type="time" accessor="collectionTime">
+	<RecordType id="8433" length="6" type="time" accessor="collectionTime">
 		<label lang="en">Time of Collection</label>
 		<label lang="de">Abnahme-Zeit</label>
+	</RecordType>
+
+	<RecordType id="8437" length="var" type="alnum" accessor="dataStreamUnits">
+		<label lang="en">Unit(s) of Data Stream</label>
+		<label lang="de">Einheit(en) für Datenstrom</label>
+	</RecordType>
+
+	<RecordType id="8438" length="var" type="alnum" accessor="dataStream">
+		<label lang="en">Data Stream</label>
+		<label lang="de">Datenstrom</label>
+	</RecordType>
+
+	<RecordType id="8510" length="1" type="num" accessor="gestation">
+		<label lang="en">Gestation (0=No)</label>
+		<label lang="de">Schwangerschaft (0=Nein)</label>
+	</RecordType>
+
+	<RecordType id="8511" length="3" type="num" accessor="gestationLength">
+		<label lang="en">Gestation length</label>
+		<label lang="de">Schwangerschaftsdauer</label>
 	</RecordType>
 
 	<RecordType id="9206" length="1" type="num" accessor="charset">
@@ -137,15 +172,8 @@
 		<label lang="de">LANR</label>
 	</RecordType>
 
-	<!--
-	<RecordType id="" length="" type="" accessor="">
+	<!-- <RecordType id="" length="" type="" accessor="">
 		<label lang="en"></label>
 		<label lang="de"></label>
-	</RecordType>
-	-->
-
-	<!--
-		'0201' => 'BSNR',
-		'0212' => 'LANR',
-	-->
+	</RecordType> -->
 </RecordTypes>
