@@ -12,9 +12,18 @@ $parser->open(shift);
 while (my $object = $parser->nextObject()) {
     last if ($object->isEmpty());
     
-    $Data::Dumper::Sortkeys = 1;
-    print Dumper($object);
-    print Dumper($object->get('collectionDate'));
+    print _extractData($object). "\n";
 }
 
 $parser->close();
+
+
+sub _extractData {
+    my $object = shift // croak('Error: parameter $object missing.');
+    
+    return sprintf(
+        '%s: %s %s (%s, %s) - %s',
+        $object->getValue('patientNumber'), $object->getValue('firstname'), $object->getValue('surname'),
+        $object->getValue('birthdate'), $object->getValue('gender'), $object->getValue('specificMap')
+    );
+}

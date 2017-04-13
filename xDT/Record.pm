@@ -43,7 +43,7 @@ around BUILDARGS => sub {
 	return $class->$orig(
 		length     => substr($line, 0, 3),
 		recordType => xDT::RecordType->new(substr($line, 3, 4)),
-		value      => substr($line, 7),
+		value      => substr($line, 7, -2),
 	);
 };
 

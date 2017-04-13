@@ -37,6 +37,15 @@ sub get {
     return grep { $_->getAccessor() eq $accessor } $self->getRecords();
 }
 
+sub getValue {
+    my $self     = shift;
+    my $accessor = shift // croak('Error: parameter $accessor missing.');
+    my @records  = $self->get($accessor);
+    
+    return undef unless @records;
+    return map { $_->getValue() } @records;
+}
+
 
 __PACKAGE__->meta->make_immutable;
 
