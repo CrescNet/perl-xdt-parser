@@ -17,11 +17,13 @@
   * The file xDT::Configuration::RecordTypes.xml contains all supported record types and is extensible.
 * Dependencies:
   * Moose
-  * Test::Class:Moose::Load
+  * Test::Class:Moose::Load (optional)
   * namespace::autoclean
   * XML::Simple
 * How to run tests:
+  * `> prove`
 * Deployment instructions:
+  * ...
 
 ### Contribution guidelines ###
 
