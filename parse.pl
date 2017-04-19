@@ -1,6 +1,7 @@
 #!/usr/bin/perl -w
 
 use Moose;
+use v5.10;
 use Time::Piece;
 use Data::Dumper;
 
@@ -13,8 +14,8 @@ $parser->open(shift);
 while (my $object = $parser->nextObject) {
 	last if $object->isEmpty;
 	
-	print _extractCoreData($object). "\n";
-	print _extractMeasurements($object). "\n";
+	say _extractCoreData($object);
+	say _extractMeasurements($object);
 }
 
 $parser->close();
@@ -26,7 +27,7 @@ sub _extractCoreData {
 	return sprintf(
 		'%s: %s %s (%s, %s)',
 		$object->getValue('patientNumber'), $object->getValue('firstname'), $object->getValue('surname'),
-		$object->getValue('birthdate'), $object->getValue('gender')
+		Time::Piece->strptime($object->getValue('birthdate'), '%d%m%Y')->ymd, $object->getValue('gender')
 	);
 }
 

@@ -1,6 +1,7 @@
 package xDT::Parser;
 
 use Moose;
+use v5.10;
 use namespace::autoclean;
 use FileHandle;
 use Carp;
@@ -36,8 +37,11 @@ sub close {
 
 sub _next {
     my $self = shift;
-
-    my $line = $self->fh->getline() or return undef;
+    my $line;
+    
+    do {
+        $line = $self->fh->getline() or return undef;
+    } while ($line =~ /^\s*$/);
 
     return xDT::Record->new($line);
 }

@@ -1,6 +1,7 @@
 package xDT::Object;
 
 use Moose;
+use v5.10;
 use namespace::autoclean;
 use Carp;
 
