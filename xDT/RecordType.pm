@@ -28,8 +28,12 @@ Perhaps a little code snippet.
 
     use xDT::RecordType;
 
-    my $foo = xDT::RecordType->new();
-    ...
+    my $recordType = xDT::RecordType->new($id);
+	# or
+	my $recordType = xDT::RecordType->new($id, $configFile);
+
+	say $recordType->getLabels()->{en};
+	say $recordType->getAccessor();
 
 =head1 EXPORT
 
