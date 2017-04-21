@@ -53,7 +53,7 @@ has 'records' => (
         sortedRecords => 'sort',
         nextRecord    => 'shift',
     },
-    documentation => 'A collection of logical associated records.',
+    documentation => q{A collection of logical associated records.},
 );
 
 =head1 SUBROUTINES/METHODS

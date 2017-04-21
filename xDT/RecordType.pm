@@ -58,7 +58,7 @@ has id => (
 	required      => 1,
 	reader        => 'getId',
 	trigger       => \&_checkId,
-	documentation => 'Unique identifier of this record type.',
+	documentation => q{Unique identifier of this record type.},
 );
 
 =head2 labels
@@ -69,7 +69,7 @@ has labels => (
 	is            => 'ro',
 	isa           => 'Maybe[HashRef[Str]]',
 	reader        => 'getLabels',
-	documentation => 'The human readable labels of this record type. Language is used as key value.',
+	documentation => q{The human readable labels of this record type. Language is used as key value.},
 );
 
 =head2 accessor
@@ -81,7 +81,7 @@ has accessor => (
 	isa           => 'Str',
 	required      => 1,
 	reader        => 'getAccessor',
-	documentation => 'Short string for easy access to this record via xDT::Object.',
+	documentation => q{Short string for easy access to this record via xDT::Object.},
 );
 
 =head2 length
@@ -92,7 +92,7 @@ has length => (
 	is            => 'ro',
 	isa           => 'Maybe[Str]',
 	reader        => 'getLength',
-	documentation => 'Max length of this record type.',
+	documentation => q{Max length of this record type.},
 );
 
 =head2 type
@@ -103,7 +103,7 @@ has type => (
 	is            => 'ro',
 	isa           => 'Maybe[Str]',
 	reader        => 'getType',
-	documentation => 'Corresponds to xDT record type string.'
+	documentation => q{Corresponds to xDT record type string.},
 );
 
 around BUILDARGS => sub {
@@ -111,10 +111,10 @@ around BUILDARGS => sub {
 	my $class = shift;
 
 	if (@_ == 1 && !ref $_[0]) {
-		return $class->$orig(_extractParametersFromConfigFile($_[0]));
+		return $class->$orig(_extractParametersFromConfigFile($_[0], $_[1]));
 	} else {
 		my %params = @_;
-		return $class->$orig(_extractParametersFromConfigFile($params{'id'}));
+		return $class->$orig(_extractParametersFromConfigFile($params{'id'}, $params{'configFile'}));
 	}
 };
 
@@ -151,15 +151,18 @@ Returns the type of this record type.
 =cut
 
 sub _extractParametersFromConfigFile {
-	my $id = shift // croak('Error: parameter $id missing.');
+	my $id         = shift // croak('Error: parameter $id missing.');
+	my $configFile = shift;
 
 	my $xml = new XML::Simple(
 		KeyAttr    => { RecordType => 'id', label => 'lang' },
 		ForceArray => 1,
 		ContentKey => '-content',
 	);
-	my $config = $xml->XMLin(File::Basename::dirname(__FILE__). '/Configuration/RecordTypes.xml')
-		->{RecordType}->{$id};
+
+	my $config = ();
+	$config = $xml->XMLin($configFile)->{RecordType}->{$id}
+		if (defined $configFile);
 	
 	return (
 		id       => $id,

@@ -7,9 +7,11 @@ use Data::Dumper;
 
 use xDT::Parser;
 
+my $xdtFile    = shift // croak('Error: no xDT file given');
+my $configFile = shift;
 
-my $parser = xDT::Parser->new;
-$parser->open(shift);
+my $parser = xDT::Parser->new($configFile);
+$parser->open($xdtFile);
 
 while (my $object = $parser->nextObject) {
 	last if $object->isEmpty;
@@ -26,8 +28,11 @@ sub _extractCoreData {
 	
 	return sprintf(
 		'%s: %s %s (%s, %s)',
-		$object->getValue('patientNumber'), $object->getValue('firstname'), $object->getValue('surname'),
-		Time::Piece->strptime($object->getValue('birthdate'), '%d%m%Y')->ymd, $object->getValue('gender')
+		$object->getValue('patientNumber'),
+		$object->getValue('firstname'),
+		$object->getValue('surname'),
+		Time::Piece->strptime($object->getValue('birthdate'), '%d%m%Y')->ymd,
+		$object->getValue('gender')
 	);
 }
 
@@ -53,7 +58,13 @@ sub _extractMeasurements {
 	push @measurements, $measurement;
 
 	return join "\n", map {
-		my $date = Time::Piece->strptime($_->{collectionDate}, '%d%m%Y')->ymd;
-		$date. " - $_->{testIdentification}: $_->{result} $_->{unit}"
+		my $date = Time::Piece->strptime($_->{collectionDate} // '', '%d%m%Y')->ymd;
+		sprintf(
+			'%s - %s: %s %s',
+			$date,
+			$_->{testIdentification},
+			$_->{result},
+			$_->{unit}
+		);
 	} @measurements;
 }

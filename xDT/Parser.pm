@@ -29,10 +29,16 @@ Can be used to open xdt files and to iterate over contained objects.
     use xDT::Parser;
 
     my $parser = xDT::Parser->new();
+    # or
+    my $parser = xDT::Parser->new($configFile);
+
+    # A config file must be in XML format and can be used to add
+    # metadata (like accessor string or labels) to each record type.
+
     $parser->open($xdtFile);
 
     my $object = $parser->nextObject();
-    ...
+    # ...
 
     $parser->close();
 
@@ -47,6 +53,29 @@ has 'fh' => (
     isa           => 'FileHandle',
     documentation => q{The filehandle the parser will use to read xDT data.},
 );
+
+=head2 config
+The file where configurations of this parser are stored.
+=cut
+
+has 'configFile' => (
+    is            => 'rw',
+    isa           => 'Maybe[Str]',
+    documentation => q{The file where configurations of this parser are stored.},
+);
+
+
+around BUILDARGS => sub {
+	my $orig  = shift;
+	my $class = shift;
+
+	if (@_ == 1 && !ref $_[0]) {
+		return $class->$orig(configFile => $_[0]);
+	} else {
+		my %params = @_;
+		return $class->$orig(\%params);
+	}
+};
 
 =head1 SUBROUTINES/METHODS
 
@@ -100,7 +129,13 @@ sub _next {
         $line = $self->fh->getline() or return undef;
     } while ($line =~ /^\s*$/);
 
-    return xDT::Record->new($line);
+    my $record = xDT::Record->new($line);
+    $record->setRecordType(xDT::RecordType->new(
+        configFile => $self->configFile,
+        id         => substr($line, 3, 4)
+    ));
+
+    return $record;
 }
 
 =head1 AUTHOR

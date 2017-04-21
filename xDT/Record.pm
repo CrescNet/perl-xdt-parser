@@ -43,7 +43,7 @@ has 'length' => (
 	isa           => 'Str',
 	required      => 1,
 	reader        => 'getLength',
-	documentation => 'The length of this records value (there are 2 extra symbols at the end of the string).'
+	documentation => q{The length of this records value (there are 2 extra symbols at the end of the string).},
 );
 
 =head2 recordType
@@ -51,9 +51,10 @@ This records record type.
 =cut
 
 has 'recordType' => (
-	is            => 'ro',
-	isa           => 'xDT::RecordType',
+	is            => 'rw',
+	isa           => 'Maybe[xDT::RecordType]',
 	required      => 1,
+	writer        => 'setRecordType',
 	reader        => 'getRecordType',
 	handles       => {
 		getAccessor  => 'getAccessor',
@@ -63,7 +64,7 @@ has 'recordType' => (
 		getMaxLength => 'getLength',
 		isObjectEnd  => 'isObjectEnd',
 	},
-	documentation => 'The record type of this record.'
+	documentation => q{The record type of this record.},
 );
 
 =head2 value
@@ -74,7 +75,7 @@ has 'value' => (
 	is            => 'ro',
 	isa           => 'Maybe[Str]',
 	reader        => 'getValue',
-	documentation => 'The value of this record as string.'
+	documentation => q{The value of this record as string.},
 );
 
 
@@ -83,7 +84,7 @@ around BUILDARGS => sub {
 
 	return $class->$orig(
 		length     => substr($line, 0, 3),
-		recordType => xDT::RecordType->new(substr($line, 3, 4)),
+		recordType => undef,
 		value      => substr($line, 7, -2),
 	);
 };
