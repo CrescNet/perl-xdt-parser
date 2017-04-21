@@ -39,7 +39,7 @@ has length => (
 	is            => 'ro',
 	isa           => 'Maybe[Str]',
 	reader        => 'getLength',
-	documentation => 'Get max length of this record type.',
+	documentation => 'Max length of this record type.',
 );
 
 has type => (
