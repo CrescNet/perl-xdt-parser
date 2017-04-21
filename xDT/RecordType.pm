@@ -1,15 +1,56 @@
 package xDT::RecordType;
 
-use Moose;
 use v5.10;
+use Moose;
 use namespace::autoclean;
 use Carp;
 use XML::Simple;
 use File::Basename;
 
+=head1 NAME
+
+xDT::RecordType - The record type of a xDT record.
+
+=head1 VERSION
+
+Version 1.00
+
+=cut
+
+our $VERSION = '1.00';
+
+
+=head1 SYNOPSIS
+
+Quick summary of what the module does.
+
+Perhaps a little code snippet.
+
+    use xDT::RecordType;
+
+    my $foo = xDT::RecordType->new();
+    ...
+
+=head1 EXPORT
+
+A list of functions that can be exported.  You can delete this section
+if you don't export anything, such as for a purely object-oriented module.
+
+=head1 CONSTANTS
+
+=head2 LENGTH
+The maximum length of a record type identifier.
+=cut
+
 use constant {
 	LENGTH => 4,
 };
+
+=head1 ATTRIBUTES
+
+=head2 id
+Unique identifier of this record type.
+=cut
 
 has id => (
 	is            => 'ro',
@@ -20,12 +61,20 @@ has id => (
 	documentation => 'Unique identifier of this record type.',
 );
 
+=head2 labels
+The human readable labels of this record type. Language is used as key value.
+=cut
+
 has labels => (
 	is            => 'ro',
 	isa           => 'Maybe[HashRef[Str]]',
 	reader        => 'getLabels',
 	documentation => 'The human readable labels of this record type. Language is used as key value.',
 );
+
+=head2 accessor
+Short string for easy access to this record via xDT::Object.
+=cut
 
 has accessor => (
 	is            => 'ro',
@@ -35,12 +84,20 @@ has accessor => (
 	documentation => 'Short string for easy access to this record via xDT::Object.',
 );
 
+=head2 length
+Max length of this record type.
+=cut
+
 has length => (
 	is            => 'ro',
 	isa           => 'Maybe[Str]',
 	reader        => 'getLength',
 	documentation => 'Max length of this record type.',
 );
+
+=head2 type
+Corresponds to xDT record type string.
+=cut
 
 has type => (
 	is            => 'ro',
@@ -61,12 +118,37 @@ around BUILDARGS => sub {
 	}
 };
 
+=head1 SUBROUTINES/METHODS
+
+=head2 isObjectEnd
+Checks if this record type is an ending record
+=cut
 
 sub isObjectEnd {
 	my $self = shift;
 
 	return $self->getId == 8201;
 }
+
+=head2 getId
+Returns the id of this record type.
+=cut
+
+=head2 getLabels
+Returns the labels of this record type.
+=cut
+
+=head2 getAccessor
+Returns the accessor of this record type.
+=cut
+
+=head2 getLength
+Returns the maximum length of this recourd type.
+=cut
+
+=head2 getType
+Returns the type of this record type.
+=cut
 
 sub _extractParametersFromConfigFile {
 	my $id = shift // croak('Error: parameter $id missing.');
@@ -96,7 +178,61 @@ sub _checkId {
 		unless (length $id == LENGTH);
 }
 
+=head1 AUTHOR
+
+Christoph Beger, C<< <christoph.beger at imise.uni-leipzig.de> >>
+
+=head1 BUGS
+
+Please report any bugs or feature requests to C<bug-xdt-parser at rt.cpan.org>, or through
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=xDT-Parser>.  I will be notified, and then you'll
+automatically be notified of progress on your bug as I make changes.
+
+
+
+
+=head1 SUPPORT
+
+You can find documentation for this module with the perldoc command.
+
+    perldoc xDT::RecordType
+
+
+You can also look for information at:
+
+=over 4
+
+=item * RT: CPAN's request tracker (report bugs here)
+
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=xDT-Parser>
+
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/xDT-Parser>
+
+=item * CPAN Ratings
+
+L<http://cpanratings.perl.org/d/xDT-Parser>
+
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/xDT-Parser/>
+
+=back
+
+
+=head1 ACKNOWLEDGEMENTS
+
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2017 Christoph Beger.
+
+This program is released under the following license: MIT
+
+
+=cut
 
 __PACKAGE__->meta->make_immutable;
 
-1;
+1; # End of xDT::RecordType

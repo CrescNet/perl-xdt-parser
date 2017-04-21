@@ -44,7 +44,6 @@ The maximum length of a record type identifier.
 
 use constant {
 	LENGTH => 4,
-
 };
 
 =head1 ATTRIBUTES

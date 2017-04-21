@@ -5,6 +5,8 @@ use Moose;
 use namespace::autoclean;
 use Carp;
 
+use xDT::Record;
+
 =head1 NAME
 
 xDT::Object - Instances of this module are collections of xDT records.

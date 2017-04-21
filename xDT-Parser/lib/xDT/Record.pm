@@ -77,6 +77,7 @@ has 'value' => (
 	documentation => 'The value of this record as string.'
 );
 
+
 around BUILDARGS => sub {
 	my ($orig, $class, $line) = @_;
 
