@@ -22,10 +22,7 @@ sub test_should_set_instance_attributes {
 
 	isa_ok my $recordType = xDT::RecordType->new(8000), 'xDT::RecordType';
 	is $recordType->getId(), 8000, '... the id should be correct';
-	ok $recordType->getLabels(), '... the labels should be an hash';
-	is $recordType->getAccessor(), 'identification', '... the accessor should be "identification"';
-	is $recordType->getType(), 'alnum', '... the type should be "alnum"';
-	is $recordType->getLength(), 4, '... the length should be 4';
+	is $recordType->getAccessor(), '8000', '... the accessor should be "8000"';
 }
 
 sub test_should_be_object_end {
