@@ -45,7 +45,9 @@ Can be used to open xdt files and to iterate over contained objects.
 =head1 ATTRUBITES
 
 =head2 fh
+
 FileHandle to the currently open file.
+
 =cut
 
 has 'fh' => (
@@ -55,7 +57,9 @@ has 'fh' => (
 );
 
 =head2 config
+
 The file where configurations of this parser are stored.
+
 =cut
 
 has 'configFile' => (
@@ -80,7 +84,10 @@ around BUILDARGS => sub {
 =head1 SUBROUTINES/METHODS
 
 =head1 open($xdtFile)
+
 Sets the parsers filehandle on this file.
+More information about the file format can be found at L<http://search.cpan.org/dist/xDT-RecordType/>.
+
 =cut
 
 sub open {
@@ -96,7 +103,9 @@ sub open {
 }
 
 =head1 close
+
 Closes the parsers filehandle
+
 =cut
 
 sub close {
@@ -106,7 +115,9 @@ sub close {
 }
 
 =head1 nextObject
+
 Returns the next object of the xDT file.
+
 =cut
 
 sub nextObject {

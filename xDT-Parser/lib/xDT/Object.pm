@@ -37,7 +37,9 @@ Each object should starts and ends with respective record types of the used xDT 
 =head1 ATTRIBUTES
 
 =head2 records
+
 An ArrayRef to xDT::Record instances.
+
 =cut
 
 has 'records' => (
@@ -59,7 +61,9 @@ has 'records' => (
 =head1 SUBROUTINES/METHODS
 
 =head2 isEmpty
+
 Checks if this object has any records.
+
 =cut
 
 sub isEmpty {
@@ -69,7 +73,9 @@ sub isEmpty {
 }
 
 =head2 get($accessor)
+
 This function returns all records of the object with have the given accessor.
+
 =cut
 
 sub get {
@@ -80,7 +86,9 @@ sub get {
 }
 
 =head2 getValue($accessor)
+
 In contrast to xDT::Object->get(), this function returns the values of records, returned by xDT::Object->get().
+
 =cut
 
 sub getValue {
@@ -93,27 +101,39 @@ sub getValue {
 }
 
 =head2 getRecords
+
 Corresponse to the elements function.
+
 =cut
 
 =head2 addRecord
+
 Corresponse to the push function.
+
 =cut
 
 =head2 mapRecords
+
 Corresponse to the map function.
+
 =cut
 
 =head2 recordCount
+
 Correpsonse to the count function.
+
 =cut
 
 =head2 sortedRecords
+
 Corresponse to the sort function.
+
 =cut
 
 =head2 nextRecord
+
 Corresponse to the shift function.
+
 =cut
 
 =head1 AUTHOR

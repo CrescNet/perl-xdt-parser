@@ -35,7 +35,9 @@ They provide some methods to acces fields and record type metadata.
 =head1 ATTRIBUTES
 
 =head2 length
+
 The length of this record.
+
 =cut
 
 has 'length' => (
@@ -47,7 +49,9 @@ has 'length' => (
 );
 
 =head2 recordType
+
 This records record type.
+
 =cut
 
 has 'recordType' => (
@@ -68,7 +72,9 @@ has 'recordType' => (
 );
 
 =head2 value
+
 The value of this record.
+
 =cut
 
 has 'value' => (
@@ -92,39 +98,57 @@ around BUILDARGS => sub {
 =head1 SUBROUTINES/METHODS
 
 =head2 getLength
+
 Returns the length of this record.
+
 =cut
 
 =head2 getRecordType
+
 Returns the record type of this record.
+
 =cut
 
 =head2 getAccessor
+
 Returns the accessor of the records record type.
+
 =cut
 
 =head2 getLabels
+
 Returns the labels of the records record type.
+
 =cut
 
 =head2 getId
+
 Returns the id of the records record type.
+
 =cut
 
 =head2 getType
+
 Returns the type of the records record type.
+
 =cut
 
 =head2 getMaxLength
+
 Returns the maximum length of the records record type.
+
 =cut
 
 =head2 isObjectEnd
+
 Checks if the records record type is an end record.
+
 =cut
 
 =head2 getValue
+
 Returns the value of this record.
+
 =cut
 
 =head1 AUTHOR

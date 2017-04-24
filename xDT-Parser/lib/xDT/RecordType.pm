@@ -43,7 +43,9 @@ if you don't export anything, such as for a purely object-oriented module.
 =head1 CONSTANTS
 
 =head2 LENGTH
+
 The maximum length of a record type identifier.
+
 =cut
 
 use constant {
@@ -53,7 +55,9 @@ use constant {
 =head1 ATTRIBUTES
 
 =head2 id
+
 Unique identifier of this record type.
+
 =cut
 
 has id => (
@@ -66,7 +70,9 @@ has id => (
 );
 
 =head2 labels
+
 The human readable labels of this record type. Language is used as key value.
+
 =cut
 
 has labels => (
@@ -77,7 +83,9 @@ has labels => (
 );
 
 =head2 accessor
+
 Short string for easy access to this record via xDT::Object.
+
 =cut
 
 has accessor => (
@@ -89,7 +97,9 @@ has accessor => (
 );
 
 =head2 length
+
 Max length of this record type.
+
 =cut
 
 has length => (
@@ -100,7 +110,9 @@ has length => (
 );
 
 =head2 type
+
 Corresponds to xDT record type string.
+
 =cut
 
 has type => (
@@ -125,7 +137,9 @@ around BUILDARGS => sub {
 =head1 SUBROUTINES/METHODS
 
 =head2 isObjectEnd
+
 Checks if this record type is an ending record
+
 =cut
 
 sub isObjectEnd {
@@ -135,23 +149,45 @@ sub isObjectEnd {
 }
 
 =head2 getId
+
 Returns the id of this record type.
+
 =cut
 
 =head2 getLabels
+
 Returns the labels of this record type.
+
 =cut
 
 =head2 getAccessor
+
 Returns the accessor of this record type.
+
 =cut
 
 =head2 getLength
+
 Returns the maximum length of this recourd type.
+
 =cut
 
 =head2 getType
-Returns the type of this record type.
+
+Extracts metadata for a given record type id from the config file, if a file was given.
+Otherwise id and accessor are set to the given id and all other attributes are undef.
+
+Format of the XML config file:
+
+	<RecordTypes>
+		<RecordType id="theId" length="theLength" type="theType" accessor="theAccessor">
+			<label lang="en">TheEnglishLabel</label>
+			<label lang="de">TheGermanLabel</label>
+			...
+		</RecordType>
+		...
+	</RecordTypes>
+
 =cut
 
 sub _extractParametersFromConfigFile {
