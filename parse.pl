@@ -7,62 +7,62 @@ use Data::Dumper;
 
 use xDT::Parser;
 
-my $xdtFile    = shift // croak('Error: no xDT file given');
-my $configFile = shift;
+my $xdt_file    = shift // croak('Error: no xDT file given');
+my $config_file = shift;
 
-my $parser = xDT::Parser->new($configFile);
-$parser->open($xdtFile);
+my $parser = xDT::Parser->new($config_file);
+$parser->open($xdt_file);
 
-while (my $object = $parser->nextObject) {
-	last if $object->isEmpty;
+while (my $object = $parser->next_object) {
+	last if $object->is_empty;
 	
-	say _extractCoreData($object);
-	say _extractMeasurements($object);
+	say _extract_core_data($object);
+	say _extract_measurements($object);
 }
 
 $parser->close();
 
 
-sub _extractCoreData {
+sub _extract_core_data {
 	my $object = shift // croak('Error: parameter $object missing.');
 	
 	return sprintf(
 		'%s: %s %s (%s, %s)',
-		$object->getValue('patientNumber'),
-		$object->getValue('firstname'),
-		$object->getValue('surname'),
-		Time::Piece->strptime($object->getValue('birthdate'), '%d%m%Y')->ymd,
-		$object->getValue('gender')
+		$object->get_value('patient_number'),
+		$object->get_value('firstname'),
+		$object->get_value('surname'),
+		Time::Piece->strptime($object->get_value('birthdate'), '%d%m%Y')->ymd,
+		$object->get_value('sex')
 	);
 }
 
-sub _extractMeasurements {
+sub _extract_measurements {
 	my $object = shift // croak('Error: parameter $object missing.');
 	my @measurements = ();
 	my $measurement = ();
 
-	while (my $record = $object->nextRecord) {
+	while (my $record = $object->next_record) {
 		last unless defined $record;
 
-		if ($record->getAccessor eq 'testIdentification') {
-			push @measurements, $measurement if defined $measurement->{testIdentification};
+		if ($record->get_accessor eq 'test_identification') {
+			push @measurements, $measurement if defined $measurement->{test_identification};
 			$measurement = ();
-			$measurement->{testIdentification} = $record->getValue;
+			$measurement->{test_identification} = $record->get_value;
 		} else {
-			foreach my $accessor ('collectionDate', 'collectionTime', 'result', 'unit') {
-				next unless $record->getAccessor eq $accessor;
-				$measurement->{$accessor} = $record->getValue;
+			foreach my $accessor ('collection_date', 'collection_time', 'result', 'unit') {
+				next unless $record->get_accessor eq $accessor;
+				$measurement->{$accessor} = $record->get_value;
 			}	
 		}
 	}
 	push @measurements, $measurement;
 
 	return join "\n", map {
-		my $date = Time::Piece->strptime($_->{collectionDate} // '', '%d%m%Y')->ymd;
+		my $date = Time::Piece->strptime($_->{collection_date} // '', '%d%m%Y')->ymd;
 		sprintf(
 			'%s - %s: %s %s',
 			$date,
-			$_->{testIdentification},
+			$_->{test_identification},
 			$_->{result},
 			$_->{unit}
 		);

@@ -30,14 +30,14 @@ Can be used to open xdt files and to iterate over contained objects.
 
     my $parser = xDT::Parser->new();
     # or
-    my $parser = xDT::Parser->new($configFile);
+    my $parser = xDT::Parser->new($config_file);
 
     # A config file must be in XML format and can be used to add
     # metadata (like accessor string or labels) to each record type.
 
-    $parser->open($xdtFile);
+    $parser->open($xdt_file);
 
-    my $object = $parser->nextObject();
+    my $object = $parser->next_object();
     # ...
 
     $parser->close();
@@ -62,7 +62,7 @@ The file where configurations of this parser are stored.
 
 =cut
 
-has 'configFile' => (
+has 'config_file' => (
     is            => 'rw',
     isa           => 'Maybe[Str]',
     documentation => q{The file where configurations of this parser are stored.},
@@ -74,7 +74,7 @@ around BUILDARGS => sub {
 	my $class = shift;
 
 	if (@_ == 1 && !ref $_[0]) {
-		return $class->$orig(configFile => $_[0]);
+		return $class->$orig(config_file => $_[0]);
 	} else {
 		my %params = @_;
 		return $class->$orig(\%params);
@@ -83,7 +83,7 @@ around BUILDARGS => sub {
 
 =head1 SUBROUTINES/METHODS
 
-=head1 open($xdtFile)
+=head1 open($xdt_file)
 
 Sets the parsers filehandle on this file.
 More information about the file format can be found at L<http://search.cpan.org/dist/xDT-RecordType/>.
@@ -114,19 +114,19 @@ sub close {
     close $self->fh;
 }
 
-=head1 nextObject
+=head1 next_object
 
 Returns the next object of the xDT file.
 
 =cut
 
-sub nextObject {
+sub next_object {
     my $self = shift;
     my $object = xDT::Object->new();
 
     while (my $record = $self->_next()) {
-        last if ($record->isObjectEnd);
-        $object->addRecord($record);
+        last if ($record->is_object_end);
+        $object->add_record($record);
     }
 
     return $object;
@@ -141,9 +141,9 @@ sub _next {
     } while ($line =~ /^\s*$/);
 
     my $record = xDT::Record->new($line);
-    $record->setRecordType(xDT::RecordType->new(
-        configFile => $self->configFile,
-        id         => substr($line, 3, 4)
+    $record->set_record_type(xDT::RecordType->new(
+        config_file => $self->config_file,
+        id          => substr($line, 3, 4)
     ));
 
     return $record;

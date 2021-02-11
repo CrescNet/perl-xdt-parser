@@ -29,10 +29,10 @@ Each object should starts and ends with respective record types of the used xDT 
 
     my @records = (); # should be an array of xDT::Record instances
     my $object  = xDT::Object->new();
-    $object->addRecord(@records);
+    $object->add_record(@records);
 
-    say 'Patient number: '. $object->getValue('patientNumber');
-    say 'Birthdate: '. $object->getValue('birthdate');
+    say 'Patient number: '. $object->get_value('patient_number');
+    say 'Birthdate: '. $object->get_value('birthdate');
 
 =head1 ATTRIBUTES
 
@@ -48,28 +48,28 @@ has 'records' => (
     traits  => ['Array'],
     default => sub { [ ] },
     handles => {
-        getRecords    => 'elements',
-        addRecord     => 'push',
-        mapRecords    => 'map',
-        recordCount   => 'count',
-        sortedRecords => 'sort',
-        nextRecord    => 'shift',
+        get_records    => 'elements',
+        add_record     => 'push',
+        map_records    => 'map',
+        record_count   => 'count',
+        sorted_records => 'sort',
+        next_record    => 'shift',
     },
     documentation => q{A collection of logical associated records.},
 );
 
 =head1 SUBROUTINES/METHODS
 
-=head2 isEmpty
+=head2 is_empty
 
 Checks if this object has any records.
 
 =cut
 
-sub isEmpty {
+sub is_empty {
     my $self = shift;
 
-    return $self->recordCount == 0;
+    return $self->record_count == 0;
 }
 
 =head2 get($accessor)
@@ -82,55 +82,55 @@ sub get {
     my $self     = shift;
     my $accessor = shift // croak('Error: parameter $accessor missing.');
 
-    return grep { $_->getAccessor() eq $accessor } $self->getRecords();
+    return grep { $_->get_accessor() eq $accessor } $self->get_records();
 }
 
-=head2 getValue($accessor)
+=head2 get_value($accessor)
 
 In contrast to xDT::Object->get(), this function returns the values of records, returned by xDT::Object->get().
 
 =cut
 
-sub getValue {
+sub get_value {
     my $self     = shift;
     my $accessor = shift // croak('Error: parameter $accessor missing.');
     my @records  = $self->get($accessor);
     
     return undef unless @records;
-    return map { $_->getValue() } @records;
+    return map { $_->get_value() } @records;
 }
 
-=head2 getRecords
+=head2 get_records
 
 Corresponse to the elements function.
 
 =cut
 
-=head2 addRecord
+=head2 add_record
 
 Corresponse to the push function.
 
 =cut
 
-=head2 mapRecords
+=head2 map_records
 
 Corresponse to the map function.
 
 =cut
 
-=head2 recordCount
+=head2 record_count
 
 Correpsonse to the count function.
 
 =cut
 
-=head2 sortedRecords
+=head2 sorted_records
 
 Corresponse to the sort function.
 
 =cut
 
-=head2 nextRecord
+=head2 next_record
 
 Corresponse to the shift function.
 

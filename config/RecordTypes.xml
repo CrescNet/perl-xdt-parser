@@ -6,7 +6,7 @@
 		<label lang="de">BSNR</label>
 	</RecordType>
 
-	<RecordType id="0202" length="var" type="alnum" accessor="healthInsurance">
+	<RecordType id="0202" length="var" type="alnum" accessor="health_insurance">
 		<label lang="en">Health Insurance</label>
 		<label lang="de">Name des Kostenträgers</label>
 	</RecordType>
@@ -16,7 +16,7 @@
 		<label lang="de">LANR</label>
 	</RecordType>
 
-	<RecordType id="3000" length="var" type="alnum" accessor="patientNumber">
+	<RecordType id="3000" length="var" type="alnum" accessor="patient_number">
 		<label lang="en">Patient Number</label>
 		<label lang="de">Patientennummer</label>
 	</RecordType>
@@ -41,12 +41,12 @@
 		<label lang="de">Titel</label>
 	</RecordType>
 
-	<RecordType id="3105" length="var" type="alnum" accessor="insuranceNumber">
+	<RecordType id="3105" length="var" type="alnum" accessor="insurance_number">
 		<label lang="en">Insurance Number</label>
 		<label lang="de">Versichertennummer</label>
 	</RecordType>
 
-	<RecordType id="3106" length="var" type="alnum" accessor="zipCodePlace">
+	<RecordType id="3106" length="var" type="alnum" accessor="zip_code_place">
 		<label lang="en">Zip-Code Place</label>
 		<label lang="de">PLZ Ort</label>
 	</RecordType>
@@ -56,8 +56,8 @@
 		<label lang="de">Straße</label>
 	</RecordType>
 
-	<RecordType id="3110" length="1" type="num" accessor="gender">
-		<label lang="en">Gender (1=male)</label>
+	<RecordType id="3110" length="1" type="num" accessor="sex">
+		<label lang="en">Sex (1=male)</label>
 		<label lang="de">Geschlecht (1=männlich)</label>
 	</RecordType>
 
@@ -71,12 +71,12 @@
 		<label lang="de">Gewicht in kg</label>
 	</RecordType>
 
-	<RecordType id="6200" length="8" type="date" accessor="storageDate">
+	<RecordType id="6200" length="8" type="date" accessor="storage_date">
 		<label lang="en">Date of storage of treatment data</label>
 		<label lang="de">Tag der Speicherung von Behandlungsdaten</label>
 	</RecordType>
 
-	<RecordType id="6201" length="6" type="time" accessor="storageTime">
+	<RecordType id="6201" length="6" type="time" accessor="storage_time">
 		<label lang="en">Time of treatment data elicitation</label>
 		<label lang="de">Zeit der Erhebung von Behandlungsdaten</label>
 	</RecordType>
@@ -86,27 +86,27 @@
 		<label lang="de">Satzidentifikation</label>
 	</RecordType>
 
-	<RecordType id="8100" length="7" type="num" accessor="recordLength">
+	<RecordType id="8100" length="7" type="num" accessor="record_length">
 		<label lang="en">Length of Record</label>
 		<label lang="de">Satzlänge</label>
 	</RecordType>
 
-	<RecordType id="8201" length="var" type="num" accessor="objectEnd">
+	<RecordType id="8201" length="var" type="num" accessor="object_end">
 		<label lang="en">Object End</label>
 		<label lang="de">Objectende</label>
 	</RecordType>
 
-	<RecordType id="8402" length="var" type="alnum" accessor="specificMap">
+	<RecordType id="8402" length="var" type="alnum" accessor="specific_map">
 		<label lang="en">Device and Process Specific Characteristic Map</label>
 		<label lang="de">Gerät und verfahrensspezifisches Kennfeld</label>
 	</RecordType>
 
-	<RecordType id="8405" length="var" type="alnum" accessor="patientInformation">
+	<RecordType id="8405" length="var" type="alnum" accessor="patient_information">
 		<label lang="en">Information about Patient</label>
 		<label lang="de">Patienteninformation</label>
 	</RecordType>
 
-	<RecordType id="8410" length="var" type="alnum" accessor="testIdentification">
+	<RecordType id="8410" length="var" type="alnum" accessor="test_identification">
 		<label lang="en">Test Identification</label>
 		<label lang="de">Test-Identifikator</label>
 	</RecordType>
@@ -121,22 +121,22 @@
 		<label lang="de">Einheit</label>
 	</RecordType>
 
-	<RecordType id="8432" length="8" type="date" accessor="collectionDate">
+	<RecordType id="8432" length="8" type="date" accessor="collection_date">
 		<label lang="en">Date of Collection</label>
 		<label lang="de">Abnahme-Datum</label>
 	</RecordType>
 
-	<RecordType id="8433" length="6" type="time" accessor="collectionTime">
+	<RecordType id="8433" length="6" type="time" accessor="collection_time">
 		<label lang="en">Time of Collection</label>
 		<label lang="de">Abnahme-Zeit</label>
 	</RecordType>
 
-	<RecordType id="8437" length="var" type="alnum" accessor="dataStreamUnits">
+	<RecordType id="8437" length="var" type="alnum" accessor="data_stream_units">
 		<label lang="en">Unit(s) of Data Stream</label>
 		<label lang="de">Einheit(en) für Datenstrom</label>
 	</RecordType>
 
-	<RecordType id="8438" length="var" type="alnum" accessor="dataStream">
+	<RecordType id="8438" length="var" type="alnum" accessor="data_stream">
 		<label lang="en">Data Stream</label>
 		<label lang="de">Datenstrom</label>
 	</RecordType>
@@ -146,7 +146,7 @@
 		<label lang="de">Schwangerschaft (0=Nein)</label>
 	</RecordType>
 
-	<RecordType id="8511" length="3" type="num" accessor="gestationLength">
+	<RecordType id="8511" length="3" type="num" accessor="gestation_length">
 		<label lang="en">Gestation length</label>
 		<label lang="de">Schwangerschaftsdauer</label>
 	</RecordType>
@@ -156,7 +156,7 @@
 		<label lang="de">Verwendeter Zeichensatz</label>
 	</RecordType>
 
-	<RecordType id="9218" length="5" type="alnum" accessor="gdtVersion">
+	<RecordType id="9218" length="5" type="alnum" accessor="gdt_version">
 		<label lang="en">Version GDT</label>
 		<label lang="de">Version GDT</label>
 	</RecordType>
