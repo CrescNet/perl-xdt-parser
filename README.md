@@ -1,38 +1,50 @@
-# Perl-based xDT Parser #
+# xDT-Parser
 
-### What is this repository for? ###
+This module can be used to parse GDT/BDT files used by german licensed physicians
+to exchange medical data between their patient data management system and other systems
+(e.g. medical equipment, health insurances). 
 
-* This repository contains a perl project for parsing xDT files.
-* Version: 0.1
 
-### How do I get set up? ###
+## INSTALLATION
 
-* Summary of set up:
-```sh
-> sudo -E apt-get install build-essential gfortran tcl git m4 freeglut3 doxygen libblas-dev liblapack-dev libx11-dev libnuma-dev zlib1g-dev libhwloc-dev
-> cpan Moose namespace::autoclean XML::Simple
-> cpan Test::Class:Moose::Load # for testing
-```
-* Configuration:
-  * The file xDT::Configuration::RecordTypes.xml contains all supported record types and is extensible.
-* Dependencies:
-  * Moose
-  * Test::Class:Moose::Load (optional)
-  * namespace::autoclean
-  * XML::Simple
-* How to run tests:
-  * `> prove`
-* Deployment instructions:
-  * ...
+This module requires the following perl modules to be installed:
 
-### Contribution guidelines ###
+    Moose
+    Test::Class:Moose::Load
+    namespace::autoclean
+    XML::Simple
 
-* Write a test module for each xDT module and place it in `/t/lib`
-* Clean Code! [1]
+To install this module, run the following commands:
 
-### Who do I talk to? ###
+	perl Makefile.PL
+	make
+	make test
+	make install
 
-* BChristoph
-* CrescNet, IMISE
+## SUPPORT AND DOCUMENTATION
 
-[1] Clean Code: A Handbook of Agile Software Craftsmanship (Robert C. Martin)
+After installing, you can find documentation for this module with the
+perldoc command.
+
+    perldoc xDT::Parser
+
+You can also look for information at:
+
+    RT, CPAN's request tracker (report bugs here)
+        http://rt.cpan.org/NoAuth/Bugs.html?Dist=xDT-Parser
+
+    AnnoCPAN, Annotated CPAN documentation
+        http://annocpan.org/dist/xDT-Parser
+
+    CPAN Ratings
+        http://cpanratings.perl.org/d/xDT-Parser
+
+    Search CPAN
+        http://search.cpan.org/dist/xDT-Parser/
+
+
+## LICENSE AND COPYRIGHT
+
+Copyright (C) 2017 Christoph Beger
+
+This program is released under the following license: MIT
