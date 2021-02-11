@@ -2,7 +2,6 @@ package xDT::Record;
 
 use v5.10;
 use Moose;
-use namespace::autoclean;
 
 use xDT::RecordType;
 

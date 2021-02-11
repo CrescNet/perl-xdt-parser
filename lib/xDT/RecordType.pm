@@ -2,8 +2,6 @@ package xDT::RecordType;
 
 use v5.10;
 use Moose;
-use namespace::autoclean;
-use Carp;
 use XML::Simple;
 use File::Basename;
 
@@ -191,7 +189,7 @@ Format of the XML config file:
 =cut
 
 sub _extract_parameters_from_config_file {
-	my $id         = shift // croak('Error: parameter $id missing.');
+	my $id         = shift // die('Error: parameter $id missing.');
 	my $config_file = shift;
 
 	my $xml = new XML::Simple(
@@ -217,7 +215,7 @@ sub _extract_parameters_from_config_file {
 sub _checkId {
 	my ($self, $id) = @_;
 
-	croak(sprintf("Error: attribute 'id' has length %d (should be %d).", length $id, LENGTH))
+	die(sprintf("Error: attribute 'id' has length %d (should be %d).", length $id, LENGTH))
 		unless (length $id == LENGTH);
 }
 

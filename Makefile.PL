@@ -15,7 +15,10 @@ WriteMakefile(
         'ExtUtils::MakeMaker' => '0',
     },
     BUILD_REQUIRES => {
-        'Test::More' => '0',
+        'Test::More' => 0,
+        'Moose' => 0,
+        'Test::Class::Moose::Load' => 0,
+        'XML::Simple' => 0,
     },
     PREREQ_PM => {
         #'ABC'              => '1.6',

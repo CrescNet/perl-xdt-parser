@@ -2,8 +2,6 @@ package xDT::Object;
 
 use v5.10;
 use Moose;
-use namespace::autoclean;
-use Carp;
 
 use xDT::Record;
 

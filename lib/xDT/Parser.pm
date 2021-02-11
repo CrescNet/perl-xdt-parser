@@ -2,9 +2,7 @@ package xDT::Parser;
 
 use v5.10;
 use Moose;
-use namespace::autoclean;
 use FileHandle;
-use Carp;
 
 use xDT::Record;
 use xDT::Object;
@@ -93,11 +91,11 @@ More information about the file format can be found at L<http://search.cpan.org/
 sub open {
     my ($self, $file) = @_;
 
-    croak("Error: provided file '$file' does not exist or is not readable.")
+    die("Error: provided file '$file' does not exist or is not readable.")
         unless (-f $file);
 
     my $fh = FileHandle->new($file, 'r')
-        or croak("Error: could not open filehandle $file.");
+        or die("Error: could not open filehandle $file.");
     
     $self->fh($fh);
 }
