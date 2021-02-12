@@ -52,7 +52,7 @@ Can be used to open xdt files and strings, and to iterate over contained objects
 
     $parser->close(); # close the file handle
 
-=head1 ATTRUBITES
+=head1 ATTRIBUTES
 
 =head2 fh
 
