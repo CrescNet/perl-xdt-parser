@@ -63,7 +63,7 @@ has id => (
 	isa           => 'Str',
 	required      => 1,
 	reader        => 'get_id',
-	trigger       => \&_checkId,
+	trigger       => \&_check_id,
 	documentation => q{Unique identifier of this record type.},
 );
 
@@ -212,7 +212,7 @@ sub _extract_parameters_from_config_file {
 }
 
 
-sub _checkId {
+sub _check_id {
 	my ($self, $id) = @_;
 
 	die(sprintf("Error: attribute 'id' has length %d (should be %d).", length $id, LENGTH))
