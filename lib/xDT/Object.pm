@@ -11,17 +11,17 @@ xDT::Object - Instances of this module are collections of xDT records.
 
 =head1 VERSION
 
-Version 1.00
+Version 1.01
 
 =cut
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 
 =head1 SYNOPSIS
 
 Instances should be used to aggregate records for a single patient.
-Each object should starts and ends with respective record types of the used xDT version.
+Each object should start and end with respective record types of the used xDT version.
 
     use xDT::Object;
 
