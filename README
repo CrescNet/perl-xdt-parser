@@ -1,11 +1,11 @@
-xDT-Parser
+# xDT-Parser
 
 This module can be used to parse GDT/BDT files used by german licensed physicians
 to exchange medical data between their patient data management system and other systems
 (e.g. medical equipment, health insurances). 
 
 
-INSTALLATION
+## INSTALLATION
 
 This module requires the following perl modules to be installed:
 
@@ -21,7 +21,7 @@ To install this module, run the following commands:
 	make test
 	make install
 
-SUPPORT AND DOCUMENTATION
+## SUPPORT AND DOCUMENTATION
 
 After installing, you can find documentation for this module with the
 perldoc command.
@@ -43,9 +43,8 @@ You can also look for information at:
         http://search.cpan.org/dist/xDT-Parser/
 
 
-LICENSE AND COPYRIGHT
+## LICENSE AND COPYRIGHT
 
 Copyright (C) 2017 Christoph Beger
 
 This program is released under the following license: MIT
-

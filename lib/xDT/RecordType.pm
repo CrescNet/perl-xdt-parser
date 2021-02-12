@@ -2,8 +2,6 @@ package xDT::RecordType;
 
 use v5.10;
 use Moose;
-use namespace::autoclean;
-use Carp;
 use XML::Simple;
 use File::Basename;
 
@@ -28,12 +26,12 @@ Perhaps a little code snippet.
 
     use xDT::RecordType;
 
-    my $recordType = xDT::RecordType->new($id);
+    my $record_type = xDT::RecordType->new($id);
 	# or
-	my $recordType = xDT::RecordType->new($id, $configFile);
+	my $record_type = xDT::RecordType->new($id, $config_file);
 
-	say $recordType->getLabels()->{en};
-	say $recordType->getAccessor();
+	say $record_type->get_labels()->{en};
+	say $record_type->get_accessor();
 
 =head1 EXPORT
 
@@ -64,7 +62,7 @@ has id => (
 	is            => 'ro',
 	isa           => 'Str',
 	required      => 1,
-	reader        => 'getId',
+	reader        => 'get_id',
 	trigger       => \&_checkId,
 	documentation => q{Unique identifier of this record type.},
 );
@@ -78,7 +76,7 @@ The human readable labels of this record type. Language is used as key value.
 has labels => (
 	is            => 'ro',
 	isa           => 'Maybe[HashRef[Str]]',
-	reader        => 'getLabels',
+	reader        => 'get_labels',
 	documentation => q{The human readable labels of this record type. Language is used as key value.},
 );
 
@@ -92,7 +90,7 @@ has accessor => (
 	is            => 'ro',
 	isa           => 'Str',
 	required      => 1,
-	reader        => 'getAccessor',
+	reader        => 'get_accessor',
 	documentation => q{Short string for easy access to this record via xDT::Object.},
 );
 
@@ -105,7 +103,7 @@ Max length of this record type.
 has length => (
 	is            => 'ro',
 	isa           => 'Maybe[Str]',
-	reader        => 'getLength',
+	reader        => 'get_length',
 	documentation => q{Max length of this record type.},
 );
 
@@ -118,7 +116,7 @@ Corresponds to xDT record type string.
 has type => (
 	is            => 'ro',
 	isa           => 'Maybe[Str]',
-	reader        => 'getType',
+	reader        => 'get_type',
 	documentation => q{Corresponds to xDT record type string.},
 );
 
@@ -127,52 +125,52 @@ around BUILDARGS => sub {
 	my $class = shift;
 
 	if (@_ == 1 && !ref $_[0]) {
-		return $class->$orig(_extractParametersFromConfigFile($_[0], $_[1]));
+		return $class->$orig(_extract_parameters_from_config_file($_[0], $_[1]));
 	} else {
 		my %params = @_;
-		return $class->$orig(_extractParametersFromConfigFile($params{'id'}, $params{'configFile'}));
+		return $class->$orig(_extract_parameters_from_config_file($params{'id'}, $params{'config_file'}));
 	}
 };
 
 =head1 SUBROUTINES/METHODS
 
-=head2 isObjectEnd
+=head2 is_object_end
 
 Checks if this record type is an ending record
 
 =cut
 
-sub isObjectEnd {
+sub is_object_end {
 	my $self = shift;
 
-	return $self->getId == 8201;
+	return $self->get_id == 8201;
 }
 
-=head2 getId
+=head2 get_id
 
 Returns the id of this record type.
 
 =cut
 
-=head2 getLabels
+=head2 get_labels
 
 Returns the labels of this record type.
 
 =cut
 
-=head2 getAccessor
+=head2 get_accessor
 
 Returns the accessor of this record type.
 
 =cut
 
-=head2 getLength
+=head2 get_length
 
 Returns the maximum length of this recourd type.
 
 =cut
 
-=head2 getType
+=head2 get_type
 
 Extracts metadata for a given record type id from the config file, if a file was given.
 Otherwise id and accessor are set to the given id and all other attributes are undef.
@@ -190,9 +188,9 @@ Format of the XML config file:
 
 =cut
 
-sub _extractParametersFromConfigFile {
-	my $id         = shift // croak('Error: parameter $id missing.');
-	my $configFile = shift;
+sub _extract_parameters_from_config_file {
+	my $id         = shift // die('Error: parameter $id missing.');
+	my $config_file = shift;
 
 	my $xml = new XML::Simple(
 		KeyAttr    => { RecordType => 'id', label => 'lang' },
@@ -201,8 +199,8 @@ sub _extractParametersFromConfigFile {
 	);
 
 	my $config = ();
-	$config = $xml->XMLin($configFile)->{RecordType}->{$id}
-		if (defined $configFile);
+	$config = $xml->XMLin($config_file)->{RecordType}->{$id}
+		if (defined $config_file);
 	
 	return (
 		id       => $id,
@@ -217,7 +215,7 @@ sub _extractParametersFromConfigFile {
 sub _checkId {
 	my ($self, $id) = @_;
 
-	croak(sprintf("Error: attribute 'id' has length %d (should be %d).", length $id, LENGTH))
+	die(sprintf("Error: attribute 'id' has length %d (should be %d).", length $id, LENGTH))
 		unless (length $id == LENGTH);
 }
 
