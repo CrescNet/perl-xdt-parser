@@ -3,7 +3,6 @@ package xDT::Parser;
 use v5.10;
 use Moose;
 use FileHandle;
-use XML::Simple;
 
 use xDT::Record;
 use xDT::RecordType;
@@ -180,6 +179,8 @@ sub next_object {
 Extracts metadata for a given record type id from a XML config file, if a file was given.
 Otherwise id and accessor are set to the given id and all other attributes are undef.
 
+XML::Simple must be installed in order to use this method.
+
 Format of the XML config file:
 
 	<RecordTypes>
@@ -198,6 +199,7 @@ sub build_config_from_xml {
 
     return [] unless (length $file);
 
+    use XML::Simple;
 	my $xml = new XML::Simple(
         KeyAttr    => { label => 'lang' },
         GroupTags  => { labels => 'label' },
