@@ -1,5 +1,5 @@
 FROM perl
-LABEL MAINTAINER Christoph Beger <christoph.beger@imise.uni-leipzig.de>
+LABEL MAINTAINER Christoph Beger <christoph.beger@medizin.uni-leipzig.de>
 
 RUN cpanm Carton
 

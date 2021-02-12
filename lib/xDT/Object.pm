@@ -137,7 +137,7 @@ Corresponse to the shift function.
 
 =head1 AUTHOR
 
-Christoph Beger, C<< <christoph.beger at imise.uni-leipzig.de> >>
+Christoph Beger, C<< <christoph.beger at medizin.uni-leipzig.de> >>
 
 =head1 BUGS
 
