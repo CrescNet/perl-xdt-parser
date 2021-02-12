@@ -87,10 +87,13 @@ has 'value' => (
 around BUILDARGS => sub {
 	my ($orig, $class, $line) = @_;
 
+	my $value = substr($line, 7);
+	$value =~ s/\s*$//g;
+
 	return $class->$orig(
 		length      => substr($line, 0, 3),
 		record_type => undef,
-		value       => substr($line, 7, -2),
+		value       => $value,
 	);
 };
 
