@@ -22,7 +22,7 @@ our $VERSION = '1.00';
 
 =head1 SYNOPSIS
 
-Can be used to open xdt files and to iterate over contained objects.
+Can be used to open xdt files and strings, and to iterate over contained objects.
 
     use xDT::Parser;
 
@@ -33,7 +33,9 @@ Can be used to open xdt files and to iterate over contained objects.
     # A config file must be in XML format and can be used to add
     # metadata (like accessor string or labels) to each record type.
 
-    $parser->open($xdt_file);
+    $parser->open(file => $xdt_file);
+    # or
+    $parser->open(string => $xdt_string);
 
     my $object = $parser->next_object();
     # ...
@@ -81,22 +83,38 @@ around BUILDARGS => sub {
 
 =head1 SUBROUTINES/METHODS
 
-=head1 open($xdt_file)
+=head1 open
 
-Sets the parsers filehandle on this file.
+$parser->open(file => 'example.gdt');
+$parser->open(string => $xdt_string);
+
+Open a file or string with the parser.
+If both file and string are given, the string will be ignored.
 More information about the file format can be found at L<http://search.cpan.org/dist/xDT-RecordType/>.
 
 =cut
 
 sub open {
-    my ($self, $file) = @_;
+    my ($self, %args) = @_;
 
-    die("Error: provided file '$file' does not exist or is not readable.")
-        unless (-f $file);
+    my $file   = $args{file};
+    my $string = $args{string};
+    my $fh;
 
-    my $fh = FileHandle->new($file, 'r')
-        or die("Error: could not open filehandle $file.");
-    
+    die 'Error: No file or string argument given to parse xDT.'
+        unless (defined $file or defined $string);
+
+    if (defined $file) {
+        die "Error: Provided file '$file' does not exist or is not readable."
+            unless (-f $file);
+
+        $fh = FileHandle->new($file, 'r')
+            or die "Error: Could not open file handle for '$file'.";
+    } else {
+        $fh = FileHandle->new(\$string, 'r')
+            or die 'Error: Could not open file handle for provided string.';
+    }
+
     $self->fh($fh);
 }
 
@@ -114,7 +132,7 @@ sub close {
 
 =head1 next_object
 
-Returns the next object of the xDT file.
+Returns the next object from xDT.
 
 =cut
 
