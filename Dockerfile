@@ -9,3 +9,5 @@ COPY config ./
 COPY cpanfile* ./
 COPY lib ./
 COPY t ./
+
+RUN carton install
