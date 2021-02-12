@@ -70,13 +70,25 @@ sub is_empty {
     return $self->record_count == 0;
 }
 
-=head2 get($accessor)
+=head2 get_every_record($accessor)
 
-This function returns all records of the object with have the given accessor.
+Returns all records as arrayref, which have the given accessor.
 
 =cut
 
-sub get {
+sub get_every_record {
+    my $self     = shift;
+    my $accessor = shift // die 'Error: parameter $accessor missing.';
+    return [ grep { $_->get_accessor() eq $accessor } $self->get_records() ];
+}
+
+=head2 get_record($accessor)
+
+Returns the first record with the given accessor, if there are any, else undef.
+
+=cut
+
+sub get_record {
     my $self     = shift;
     my $accessor = shift // die 'Error: parameter $accessor missing.';
     my ($record) = grep { $_->get_accessor() eq $accessor } $self->get_records();
@@ -84,19 +96,32 @@ sub get {
     return $record;
 }
 
+=head2 get_every_value($accessor)
+
+Returns the values of all records as arrayref, which have the given accessor.
+
+=cut
+
+sub get_every_value {
+    my $self     = shift;
+    my $accessor = shift // die 'Error: parameter $accessor missing.';
+    my $records  = $self->get_every_record($accessor);
+
+    return [ map { $_->get_value } @$records ];
+}
+
 =head2 get_value($accessor)
 
-In contrast to xDT::Object->get(), this function returns the values of records, returned by xDT::Object->get().
+Returns the value of the first record with the given accessor, if there are any, else undef.
 
 =cut
 
 sub get_value {
     my $self     = shift;
     my $accessor = shift // die 'Error: parameter $accessor missing.';
-    my $record   = $self->get($accessor);
-    
-    return undef unless $record;
-    return $record->get_value;
+    my $record   = $self->get_record($accessor);
+
+    return $record ? $record->get_value : undef;
 }
 
 =head2 get_records
