@@ -79,8 +79,9 @@ This function returns all records of the object with have the given accessor.
 sub get {
     my $self     = shift;
     my $accessor = shift // die 'Error: parameter $accessor missing.';
+    my ($record) = grep { $_->get_accessor() eq $accessor } $self->get_records();
 
-    return wantarray ? @records : \@records;
+    return $record;
 }
 
 =head2 get_value($accessor)
@@ -92,10 +93,10 @@ In contrast to xDT::Object->get(), this function returns the values of records, 
 sub get_value {
     my $self     = shift;
     my $accessor = shift // die 'Error: parameter $accessor missing.';
+    my $record   = $self->get($accessor);
     
-    return undef unless @records;
-    my @values = map { $_->get_value() } @records;
-    return wantarray ? @values : \@values;
+    return undef unless $record;
+    return $record->get_value;
 }
 
 =head2 get_records
