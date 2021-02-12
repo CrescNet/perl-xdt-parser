@@ -43,7 +43,9 @@ subtest 'should parse with config xml', sub {
 	is @{$parser->record_type_config}, 34, 'config populated from xml';
 	$parser->open(string => $xdt_string);
 
-	is $parser->next_object->get_value('surname'), 'Testmann', 'value as expected';
+	while (my $object = $parser->next_object) {
+		is $object->get_value('surname'), 'Testmann', 'value as expected';
+	}
 };
 
 done_testing;
