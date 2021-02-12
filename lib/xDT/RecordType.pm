@@ -2,8 +2,6 @@ package xDT::RecordType;
 
 use v5.10;
 use Moose;
-use XML::Simple;
-use File::Basename;
 
 =head1 NAME
 
@@ -120,18 +118,6 @@ has type => (
 	documentation => q{Corresponds to xDT record type string.},
 );
 
-around BUILDARGS => sub {
-	my $orig  = shift;
-	my $class = shift;
-
-	if (@_ == 1 && !ref $_[0]) {
-		return $class->$orig(_extract_parameters_from_config_file($_[0], $_[1]));
-	} else {
-		my %params = @_;
-		return $class->$orig(_extract_parameters_from_config_file($params{'id'}, $params{'config_file'}));
-	}
-};
-
 =head1 SUBROUTINES/METHODS
 
 =head2 is_object_end
@@ -170,45 +156,21 @@ Returns the maximum length of this recourd type.
 
 =cut
 
-=head2 get_type
-
-Extracts metadata for a given record type id from the config file, if a file was given.
-Otherwise id and accessor are set to the given id and all other attributes are undef.
-
-Format of the XML config file:
-
-	<RecordTypes>
-		<RecordType id="theId" length="theLength" type="theType" accessor="theAccessor">
-			<label lang="en">TheEnglishLabel</label>
-			<label lang="de">TheGermanLabel</label>
-			...
-		</RecordType>
-		...
-	</RecordTypes>
+=head2 build_from_arrayref
 
 =cut
 
-sub _extract_parameters_from_config_file {
-	my $id         = shift // die('Error: parameter $id missing.');
-	my $config_file = shift;
+sub build_from_arrayref {
+	my $id       = shift // die 'Error: parameter $id missing.';
+	my $arrayref = shift;
+	my $config;
 
-	my $xml = new XML::Simple(
-		KeyAttr    => { RecordType => 'id', label => 'lang' },
-		ForceArray => 1,
-		ContentKey => '-content',
-	);
+	($config) = grep { $_->{id} eq $id } @$arrayref
+		if ($arrayref);
 
-	my $config = ();
-	$config = $xml->XMLin($config_file)->{RecordType}->{$id}
-		if (defined $config_file);
-	
-	return (
-		id       => $id,
-		labels   => $config->{label},
-		type     => $config->{type},
-		accessor => $config->{accessor} // $id,
-		length   => $config->{length},
-	);
+	$config = { id => $id, accessor => $id } unless ($config);
+
+	return xDT::RecordType->new($config);
 }
 
 
