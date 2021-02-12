@@ -45,7 +45,8 @@ The maximum length of a record type identifier.
 =cut
 
 use constant {
-	LENGTH => 4,
+	LENGTH        => 4,
+	END_RECORD_ID => 8201,
 };
 
 =head1 ATTRIBUTES
@@ -131,7 +132,7 @@ Checks if this record type is an ending record
 sub is_object_end {
 	my $self = shift;
 
-	return $self->get_id == 8201;
+	return $self->get_id == END_RECORD_ID;
 }
 
 =head2 get_id
