@@ -1,5 +1,8 @@
 Revision history for xDT-Parser
 
+1.02  2021-02-12
+  - Add methods to retrieve multiple records/values with same identifier
+
 1.01  2021-02-12
   - Improved configuration of record types (now possible via XML, JSON and Perl arrayref)
   - Implemented parsing of xDT files and strings
