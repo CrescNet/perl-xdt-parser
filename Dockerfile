@@ -5,9 +5,9 @@ RUN cpanm Carton
 
 WORKDIR /xdt-parser
 
-COPY config ./
 COPY cpanfile* ./
-COPY lib ./
-COPY t ./
-
 RUN carton install
+
+COPY config ./config
+COPY lib ./lib
+COPY t/ ./t
