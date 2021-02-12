@@ -45,6 +45,6 @@ You can also look for information at:
 
 ## LICENSE AND COPYRIGHT
 
-Copyright (C) 2017 Christoph Beger
+Copyright (C) 2017-2021 Christoph Beger, University of Leipzig
 
 This program is released under the following license: MIT
