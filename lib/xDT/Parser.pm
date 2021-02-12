@@ -34,6 +34,10 @@ Can be used to open xdt files and strings, and to iterate over contained objects
     my $parser = xDT::Parser->new(
         record_type_config => xDT::Parser::build_config_from_xml($xml_file)
     );
+    # or
+    my $parser = xDT::Parser->new(
+        record_type_config => JSON::Parser::read_json($json_file)
+    );
 
     # A record type configuration can be provided via xml file or arrayref and can be used to add
     # metadata (like accessor string or labels) to each record type.
@@ -200,13 +204,11 @@ sub build_config_from_xml {
     return [] unless (length $file);
 
     use XML::Simple;
-	my $xml = new XML::Simple(
+	return XML::Simple->new(
         KeyAttr    => { label => 'lang' },
         GroupTags  => { labels => 'label' },
 		ContentKey => '-content',
-	);
-
-	return $xml->XMLin($file)->{RecordType};
+	)->XMLin($file)->{RecordType};
 }
 
 sub _next {
