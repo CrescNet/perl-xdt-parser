@@ -5,6 +5,7 @@ use Moose;
 use FileHandle;
 
 use xDT::Record;
+use xDT::RecordType;
 use xDT::Object;
 
 =head1 NAME
@@ -28,19 +29,28 @@ Can be used to open xdt files and strings, and to iterate over contained objects
 
     my $parser = xDT::Parser->new();
     # or
-    my $parser = xDT::Parser->new($config_file);
+    my $parser = xDT::Parser->new(record_type_config => $config);
+    # or
+    my $parser = xDT::Parser->new(
+        record_type_config => xDT::Parser::build_config_from_xml($xml_file)
+    );
+    # or
+    my $parser = xDT::Parser->new(
+        record_type_config => JSON::Parser::read_json($json_file)
+    );
 
-    # A config file must be in XML format and can be used to add
+    # A record type configuration can be provided via xml file or arrayref and can be used to add
     # metadata (like accessor string or labels) to each record type.
 
-    $parser->open(file => $xdt_file);
+    $parser->open(file => $xdt_file);     # read from file
     # or
-    $parser->open(string => $xdt_string);
+    $parser->open(string => $xdt_string); # read from string
 
-    my $object = $parser->next_object();
-    # ...
+    while (my $object = $parser->next_object) {  # iterate xdt objects
+        # ...
+    }
 
-    $parser->close();
+    $parser->close(); # close the file handle
 
 =head1 ATTRUBITES
 
@@ -56,29 +66,42 @@ has 'fh' => (
     documentation => q{The filehandle the parser will use to read xDT data.},
 );
 
-=head2 config
+=head2 record_type_config
 
-The file where configurations of this parser are stored.
+The C<RecordType> configurations.
+
+e.g.:
+
+    [{
+        "id": "0201",
+        "length": "9",
+        "type": "num",
+        "accessor": "bsnr",
+        "labels": {
+            "en": "BSNR",
+            "de": "BSNR"
+        }
+    }]
 
 =cut
 
-has 'config_file' => (
+has 'record_type_config' => (
     is            => 'rw',
-    isa           => 'Maybe[Str]',
-    documentation => q{The file where configurations of this parser are stored.},
+    isa           => 'ArrayRef',
+    documentation => q{Contains configurations for record types.},
 );
 
 
 around BUILDARGS => sub {
-	my $orig  = shift;
-	my $class = shift;
+    my $orig  = shift;
+    my $class = shift;
 
-	if (@_ == 1 && !ref $_[0]) {
-		return $class->$orig(config_file => $_[0]);
-	} else {
-		my %params = @_;
-		return $class->$orig(\%params);
-	}
+    if (@_ == 1) {
+        return $class->$orig(record_type_config => $_[0]);
+    } else {
+        my %params = @_;
+        return $class->$orig(\%params);
+    }
 };
 
 =head1 SUBROUTINES/METHODS
@@ -138,14 +161,54 @@ Returns the next object from xDT.
 
 sub next_object {
     my $self = shift;
-    my $object = xDT::Object->new();
+    my @records;
 
     while (my $record = $self->_next()) {
         last if ($record->is_object_end);
+        push @records, $record;
+    }
+
+    return undef unless (scalar @records);
+
+    my $object = xDT::Object->new();
+    foreach my $record (@records) {
         $object->add_record($record);
     }
 
     return $object;
+}
+
+=head2 build_config_from_xml
+
+Extracts metadata for a given record type id from a XML config file, if a file was given.
+Otherwise id and accessor are set to the given id and all other attributes are undef.
+
+XML::Simple must be installed in order to use this method.
+
+Format of the XML config file:
+
+	<RecordTypes>
+		<RecordType id="theId" length="theLength" type="theType" accessor="theAccessor">
+			<label lang="en">TheEnglishLabel</label>
+			<label lang="de">TheGermanLabel</label>
+			<!-- more labels -->
+		</RecordType>
+		<!-- more record types -->
+	</RecordTypes>
+
+=cut
+
+sub build_config_from_xml {
+	my $file = shift;
+
+    return [] unless (length $file);
+
+    use XML::Simple;
+	return XML::Simple->new(
+        KeyAttr    => { label => 'lang' },
+        GroupTags  => { labels => 'label' },
+		ContentKey => '-content',
+	)->XMLin($file)->{RecordType};
 }
 
 sub _next {
@@ -157,9 +220,9 @@ sub _next {
     } while ($line =~ /^\s*$/);
 
     my $record = xDT::Record->new($line);
-    $record->set_record_type(xDT::RecordType->new(
-        config_file => $self->config_file,
-        id          => substr($line, 3, 4)
+    $record->set_record_type(xDT::RecordType::build_from_arrayref(
+        substr($line, 3, 4),
+        $self->record_type_config,
     ));
 
     return $record;
