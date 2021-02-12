@@ -158,10 +158,17 @@ Returns the next object from xDT.
 
 sub next_object {
     my $self = shift;
-    my $object = xDT::Object->new();
+    my @records;
 
     while (my $record = $self->_next()) {
         last if ($record->is_object_end);
+        push @records, $record;
+    }
+
+    return undef unless (scalar @records);
+
+    my $object = xDT::Object->new();
+    foreach my $record (@records) {
         $object->add_record($record);
     }
 
