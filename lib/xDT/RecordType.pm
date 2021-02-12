@@ -88,7 +88,9 @@ has accessor => (
 	is            => 'ro',
 	isa           => 'Str',
 	required      => 1,
+	lazy          => 1,
 	reader        => 'get_accessor',
+	default       => sub { shift->get_id },
 	documentation => q{Short string for easy access to this record via xDT::Object.},
 );
 
