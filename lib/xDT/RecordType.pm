@@ -160,6 +160,9 @@ Returns the maximum length of this recourd type.
 
 =head2 build_from_arrayref
 
+Constructs a C<RecordType> from a arrayref containing configurations.
+This method will propagate the hashref, that contains the provided id, to the C<new> method.
+
 =cut
 
 sub build_from_arrayref {
