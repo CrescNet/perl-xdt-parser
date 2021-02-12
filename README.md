@@ -10,8 +10,6 @@ to exchange medical data between their patient data management system and other 
 This module requires the following perl modules to be installed:
 
     Moose
-    Test::Class:Moose::Load
-    namespace::autoclean
     XML::Simple
 
 To install this module, run the following commands:
@@ -29,15 +27,6 @@ perldoc command.
     perldoc xDT::Parser
 
 You can also look for information at:
-
-    RT, CPAN's request tracker (report bugs here)
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=xDT-Parser
-
-    AnnoCPAN, Annotated CPAN documentation
-        http://annocpan.org/dist/xDT-Parser
-
-    CPAN Ratings
-        http://cpanratings.perl.org/d/xDT-Parser
 
     Search CPAN
         http://search.cpan.org/dist/xDT-Parser/
