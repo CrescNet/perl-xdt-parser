@@ -29,7 +29,7 @@ subtest 'should parse string', sub {
 
 subtest 'should parse with xml config', sub {
 	my $configs = xDT::Parser::build_config_from_xml('config/record_types.xml');
-	is scalar @$configs, 34, 'number of config entries as expected';
+	is scalar @$configs, 32, 'number of config entries as expected';
 
 	my ($config) = grep { $_->{id} eq '9206' } @$configs;
 	ok $config, 'config for 9206 exists';
@@ -40,7 +40,7 @@ subtest 'should parse with xml config', sub {
 	is $config->{labels}->{de}, 'Verwendeter Zeichensatz', 'de label as expected';
 
 	isa_ok my $parser = xDT::Parser->new(record_type_config => $configs), 'xDT::Parser';
-	is @{$parser->record_type_config}, 34, 'config populated from xml';
+	is @{$parser->record_type_config}, 32, 'config populated from xml';
 	$parser->open(string => $xdt_string);
 
 	while (my $object = $parser->next_object) {
@@ -51,10 +51,10 @@ subtest 'should parse with xml config', sub {
 subtest 'should parse with json config', sub {
 	use JSON::Parse 'read_json';
 	my $configs = read_json('config/record_types.json');
-	is scalar @$configs, 34, 'number of config entries as expected';
+	is scalar @$configs, 32, 'number of config entries as expected';
 
 	isa_ok my $parser = xDT::Parser->new(record_type_config => $configs), 'xDT::Parser';
-	is @{$parser->record_type_config}, 34, 'config populated from json';
+	is @{$parser->record_type_config}, 32, 'config populated from json';
 	$parser->open(string => $xdt_string);
 
 	while (my $object = $parser->next_object) {

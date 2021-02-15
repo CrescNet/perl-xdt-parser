@@ -22,8 +22,8 @@ subtest 'should set instance attributes', sub {
 };
 
 subtest 'should be object end', sub {
-	isa_ok my $record_type = xDT::RecordType->new(id => 8201), 'xDT::RecordType';
-	is $record_type->is_object_end, 1, '8201 should be end of object';
+	isa_ok my $record_type = xDT::RecordType->new(id => 8003), 'xDT::RecordType';
+	is $record_type->is_object_end, 1, '8003 should be end of object';
 };
 
 subtest 'should not be object end', sub {
