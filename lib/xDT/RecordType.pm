@@ -7,15 +7,6 @@ use Moose;
 
 xDT::RecordType - The record type of a xDT record.
 
-=head1 VERSION
-
-Version 1.02
-
-=cut
-
-our $VERSION = '1.02';
-
-
 =head1 SYNOPSIS
 
 Quick summary of what the module does.
@@ -30,7 +21,6 @@ Perhaps a little code snippet.
 
 	say $record_type->get_labels()->{en};
 	say $record_type->get_accessor();
-
 
 =head1 CONSTANTS
 

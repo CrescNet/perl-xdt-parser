@@ -9,15 +9,6 @@ use xDT::RecordType;
 
 xDT::Record - A xDT record
 
-=head1 VERSION
-
-Version 2
-
-=cut
-
-our $VERSION = '1.02';
-
-
 =head1 SYNOPSIS
 
 Instances of this module correspond to records (lines) in a xDT file.
