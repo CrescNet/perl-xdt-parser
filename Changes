@@ -1,5 +1,8 @@
 Revision history for xDT-Parser
 
+1.03  2021-02-15
+  - Update to BDT/GDT 3.1
+
 1.02  2021-02-12
   - Add methods to retrieve multiple records/values with same identifier
 
