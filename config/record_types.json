@@ -318,25 +318,5 @@
 			"en": "Version GDT",
 			"de": "Version GDT"
 		}
-	},
-	{
-		"id": "5098",
-		"length": "9",
-		"type": "num",
-		"accessor": "bsnr",
-		"labels": {
-			"en": "BSNR",
-			"de": "BSNR"
-		}
-	},
-	{
-		"id": "5099",
-		"length": "9",
-		"type": "num",
-		"accessor": "bsnr",
-		"labels": {
-			"en": "LANR",
-			"de": "LANR"
-		}
 	}
 ]

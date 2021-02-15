@@ -225,21 +225,6 @@
 		</labels>
 	</RecordType>
 
-	<!-- BDT -->
-	<RecordType id="5098" length="9" type="num" accessor="bsnr">
-		<labels>
-			<label lang="en">BSNR</label>
-			<label lang="de">BSNR</label>
-		</labels>
-	</RecordType>
-
-	<RecordType id="5099" length="9" type="num" accessor="bsnr">
-		<labels>
-			<label lang="en">LANR</label>
-			<label lang="de">LANR</label>
-		</labels>
-	</RecordType>
-
 	<!-- <RecordType id="" length="" type="" accessor="">
 		<labels>
 			<label lang="en"></label>
