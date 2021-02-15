@@ -127,7 +127,7 @@
 		</labels>
 	</RecordType>
 
-	<RecordType id="8201" length="var" type="num" accessor="object_end">
+	<RecordType id="8003" length="var" type="num" accessor="object_end">
 		<labels>
 			<label lang="en">Object End</label>
 			<label lang="de">Objectende</label>

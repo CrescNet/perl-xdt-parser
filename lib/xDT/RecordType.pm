@@ -46,7 +46,7 @@ ID of records at the end of an object.
 
 use constant {
 	LENGTH        => 4,
-	END_RECORD_ID => 8201,
+	END_RECORD_ID => 8003,
 };
 
 =head1 ATTRIBUTES
