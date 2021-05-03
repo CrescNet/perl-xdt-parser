@@ -9,6 +9,15 @@ use xDT::Record;
 
 xDT::Object - Instances of this module are collections of xDT records.
 
+=head1 VERSION
+
+Version 1.05
+
+=cut
+
+our $VERSION = '1.05';
+
+
 =head1 SYNOPSIS
 
 Instances should be used to aggregate records for a single patient.

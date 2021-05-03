@@ -7,6 +7,15 @@ use Moose;
 
 xDT::RecordType - The record type of a xDT record.
 
+=head1 VERSION
+
+Version 1.05
+
+=cut
+
+our $VERSION = '1.05';
+
+
 =head1 SYNOPSIS
 
 Quick summary of what the module does.
