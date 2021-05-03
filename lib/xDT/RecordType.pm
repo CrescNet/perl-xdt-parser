@@ -9,11 +9,11 @@ xDT::RecordType - The record type of a xDT record.
 
 =head1 VERSION
 
-Version 1.05
+Version 1.06
 
 =cut
 
-our $VERSION = '1.05';
+our $VERSION = '1.06';
 
 
 =head1 SYNOPSIS
