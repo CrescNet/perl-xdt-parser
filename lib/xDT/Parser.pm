@@ -187,28 +187,28 @@ XML::Simple must be installed in order to use this method.
 
 Format of the XML config file:
 
-	<RecordTypes>
-		<RecordType id="theId" length="theLength" type="theType" accessor="theAccessor">
-			<label lang="en">TheEnglishLabel</label>
-			<label lang="de">TheGermanLabel</label>
-			<!-- more labels -->
-		</RecordType>
-		<!-- more record types -->
-	</RecordTypes>
+    <RecordTypes>
+        <RecordType id="theId" length="theLength" type="theType" accessor="theAccessor">
+            <label lang="en">TheEnglishLabel</label>
+            <label lang="de">TheGermanLabel</label>
+            <!-- more labels -->
+        </RecordType>
+        <!-- more record types -->
+    </RecordTypes>
 
 =cut
 
 sub build_config_from_xml {
-	my $file = shift;
+    my $file = shift;
 
     return [] unless (length $file);
 
     use XML::Simple;
-	return XML::Simple->new(
+    return XML::Simple->new(
         KeyAttr    => { label => 'lang' },
         GroupTags  => { labels => 'label' },
-		ContentKey => '-content',
-	)->XMLin($file)->{RecordType};
+        ContentKey => '-content',
+    )->XMLin($file)->{RecordType};
 }
 
 sub _next {
