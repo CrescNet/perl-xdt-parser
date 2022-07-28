@@ -34,6 +34,6 @@ You can also look for information at:
 
 ## LICENSE AND COPYRIGHT
 
-Copyright (C) 2017-2022 CrescNet, University of Leipzig
+Copyright (C) 2017-2022 CrescNet, Leipzig University
 
 This program is released under the following license: MIT
